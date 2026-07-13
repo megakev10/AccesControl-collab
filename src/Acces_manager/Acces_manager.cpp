@@ -4,7 +4,13 @@
     User_manager u;
     Preferences p;
     TimeService t;
+    KeypadDriver k;
+    WebCom w;
 
+    void Acces_manager::init(){
+        f.init();
+        t.init();
+    }
 
     void Acces_manager::enrollProtocol(){
         Serial.println("Ready to enroll a fingerprint!");
@@ -36,7 +42,21 @@
         delay(5000);  
     }
 
-    void Acces_manager::init(){
-        f.init();
-        t.init();
+    void Acces_manager::PinAuth(){
+        Serial.println("Please enter your digicode");
+        while(Serial.available())
+        ;
+        if(k.getxtestPin()){
+            Serial.println("Acces granted");
+        }else{
+            Serial.println("Acces refused");
+        }
+        Serial.println(k.getxtestPin());
+        delay(5000);
+    }
+
+    void Acces_manager::web(){
+        w.init();
+        String event = w.construct_event("kevin", 12, "13/07/2026","granted", "fingerprint");
+        w.send_event(event);
     }

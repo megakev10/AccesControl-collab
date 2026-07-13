@@ -7,6 +7,8 @@
 #include "../drivers/fingerprintDriver.h"
 #include "../User_manager/User_manager.h"
 #include "../TimeService/TimeService.h"
+#include "../KeypadDriver/KeypadDriver.h"
+#include "../WebCom/WebCom.h"
 
         
 
@@ -15,6 +17,8 @@ class Acces_manager{
         void enrollProtocol();
         void BiometricalAuth();
         void init();
+        void PinAuth();
+        void web();
     private:
         uint8_t INDEX = 0;
 };
