@@ -6,10 +6,12 @@
     TimeService t;
     KeypadDriver k;
     WebCom w;
+    StorageService s;
 
     void Acces_manager::init(){
         f.init();
         t.init();
+        s.store_init();
     }
 
     void Acces_manager::enrollProtocol(){
@@ -37,7 +39,10 @@
                 Serial.print("Bienvenue ");
                 Serial.println(u.names_array[INDEX]);
             p.end();
-            Serial.println(t.getDate());    
+            String d = t.getDate();
+            Serial.println(d); 
+            s.construct_event(u.names_array[INDEX], INDEX, d, "granted", "fingerprint sensor");
+            s.storeHistory();   
         }
         delay(5000);  
     }
@@ -57,6 +62,9 @@
 
     void Acces_manager::web(){
         w.init();
-        String event = w.construct_event("kevin", 12, "13/07/2026","granted", "fingerprint");
-        w.send_event(event);
+        w.send_event(s.getHistory());
+    }
+
+    void Acces_manager::Store(){
+
     }

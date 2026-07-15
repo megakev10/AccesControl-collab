@@ -3,6 +3,7 @@
 #include <HTTPClient.h>
 #include "WebCom.h"
 
+
 HTTPClient http;
 
 void WebCom::init(){
@@ -14,17 +15,6 @@ void WebCom::init(){
     }
     Serial.println("WiFi Connection succeded");   
 }
-
-String WebCom::construct_event(String name, uint8_t id, String date, String Status, String method){
-    event = "{";
-    event += "\"name\" : \""+ name +"\",";
-    event += "\"ID:\" : "+ String(id) +",";
-    event += "\"date\" : \"" + date + "\",";
-    event += "\"Status\" : \" granted \",";
-    event += "\"method\" : \"" + method + "\",";
-    event += "}";
-    return event;
-} 
 
 void WebCom::send_event(String ev){
     http.begin(url); 

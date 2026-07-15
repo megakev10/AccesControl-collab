@@ -9,6 +9,7 @@
 #include "../TimeService/TimeService.h"
 #include "../KeypadDriver/KeypadDriver.h"
 #include "../WebCom/WebCom.h"
+#include "../StorageService/StorageService.h"
 
         
 
@@ -19,6 +20,7 @@ class Acces_manager{
         void init();
         void PinAuth();
         void web();
+        void Store();
     private:
         uint8_t INDEX = 0;
 };
