@@ -2,6 +2,7 @@
 #define KeypadDriver_H
 
 #include <Arduino.h>
+#include <Keypad.h>
 
 class KeypadDriver{
     public: 
@@ -16,6 +17,7 @@ class KeypadDriver{
         byte rowPins[4] = {13, 12, 14, 27}; 
         byte colPins[4] = {26, 25, 33, 32}; 
         char code[6];
+        Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
         int getxtestPin();
 };
 

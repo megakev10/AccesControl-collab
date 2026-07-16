@@ -4,7 +4,7 @@
 
 class StorageService{
     public:
-    void store_init();
+    bool store_init();
     String construct_event(String name, uint8_t id, String date, String Status, String method);
     void storeHistory();
     String getHistory();

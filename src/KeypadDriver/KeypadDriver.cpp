@@ -3,16 +3,16 @@
 #include "KeypadDriver.h"
 
 int KeypadDriver::getxtestPin(){
-
-  Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
   
-  for(int i=0; i<6; i++){
+  for(int i=0; i<5;){
     char customKey = keypad.getKey();
     if (customKey){
       Serial.print(customKey);
       code[i] = customKey; 
+      i++;
     }
   }
+  code[5] = '\0';
   char accessKey [6]= "12345";
   return (strcmp(code, accessKey));
 }

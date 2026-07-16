@@ -2,10 +2,10 @@
 #include <LittleFS.h>
 #include "StorageService.h"
 
-void StorageService::store_init(){
-    if (!LittleFS.begin(true)) {
+bool StorageService::store_init(){
+    if (!LittleFS.begin(true)) { // Il est mieux de mettre "begin() simplement en demo"
         Serial.println("Fail to mount LittleFS");
-    return;
+    return true;
     }
 }
 

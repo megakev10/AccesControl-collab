@@ -12,6 +12,7 @@
         f.init();
         t.init();
         s.store_init();
+        w.init();
     }
 
     void Acces_manager::enrollProtocol(){
@@ -41,8 +42,13 @@
             p.end();
             String d = t.getDate();
             Serial.println(d); 
-            s.construct_event(u.names_array[INDEX], INDEX, d, "granted", "fingerprint sensor");
-            s.storeHistory();   
+            String e = s.construct_event(u.names_array[INDEX], INDEX, d, "granted", "fingerprint sensor");  
+            w.send_event(e);
+            if (!s.store_init()){
+                Serial.println("Storage unavailable");
+            }else{
+                s.storeHistory(); 
+            }
         }
         delay(5000);  
     }
@@ -51,17 +57,18 @@
         Serial.println("Please enter your digicode");
         while(Serial.available())
         ;
-        if(k.getxtestPin()){
-            Serial.println("Acces granted");
+        int result = k.getxtestPin();
+        if(result == 0){
+            Serial.println("-----Acces granted");
         }else{
-            Serial.println("Acces refused");
+            Serial.println("-----Acces refused");
         }
-        Serial.println(k.getxtestPin());
+        Serial.println(result);
         delay(5000);
     }
 
     void Acces_manager::web(){
-        w.init();
+
         w.send_event(s.getHistory());
     }
 

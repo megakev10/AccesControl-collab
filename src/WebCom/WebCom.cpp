@@ -17,7 +17,11 @@ void WebCom::init(){
 }
 
 void WebCom::send_event(String ev){
+    //if (WiFi.status() == WL_CONNECTED){
     http.begin(url); 
-    http.addHeader("Content_Type", "application/json");
-    http.POST(ev);
+    http.addHeader("Content-Type", "application/json");
+    int r = http.POST(ev);
+    http.end();
+    Serial.println(r);
+    //}
 }
